@@ -2,33 +2,57 @@ console.log("***** Cart Functions *****");
 // Make sure to test all functions here in the JS file!
 // We want to see how you are testing your code!!!
 let basket = [];
-// const maxItems = 5;
+const maxItems = 5;
 
-function addItem(item){
-    //Push new item to basket array
-    basket.push(item);
-    console.log('Item added to basket: ', item);
-    return true;
-}//end addItem function
+function addItem(item) {
+  // Check if basket is full
+  if(isFull()===false){
+  //Push new item to basket array
+  basket.push(item);
+  console.log("Item added to basket: ", item);
+  return true;
+  } else {
+    console.log('Too many items in basket! Cannot add ' + item);
+  }
+} //end addItem function
 
-function listItems(list){
-    for( let contents of list){
-        console.log('Items in basket: ', contents);
-    }// end for loop listing items
+function listItems(list) {
+  for (let contents of list) {
+    console.log("Items in basket: ", contents);
+  } // end for loop listing items
 } // end listItems function
 
-function empty(){
-    basket = [];
-    console.log('Basket was emptied', basket);
+function empty() {
+  basket = [];
+  console.log("Basket was emptied", basket);
 }
 
-//Code for testing
-// addItem('Steak');
-// addItem('potatoes');
-// addItem('Asparagus');
-// listItems(basket);
-// empty();
+function isFull() {
+  if (basket.length === maxItems) {
+    return true;
+  } else {
+    return false;
+  }
+} // end isFull function
 
+//Code for testing
+console.log("Starting basket:", basket);
+console.log('--- Add 4 new items ---');
+addItem("Steak");
+addItem("potatoes");
+addItem("Asparagus");
+addItem("gravy");
+console.log("Check if cart is full (expect false)?", isFull(), basket);
+console.log('--- Add bread ---');
+addItem("bread");
+console.log("Check if cart is full (expect true)?", isFull(), basket);
+console.log('--- Try to add Dessert, Expect to be full ---');
+addItem('Dessert');
+console.log('--- Run list items (expect 5 items) ---');
+listItems(basket);
+console.log('--- Run empty basket function (expect empty basket) --- ')
+empty();
+console.log(basket);
 
 // DO NOT MODIFY
 // Used for automated testing
