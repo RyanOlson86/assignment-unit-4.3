@@ -6,13 +6,14 @@ const maxItems = 5;
 
 function addItem(item) {
   // Check if basket is full
-  if(isFull()===false){
-  //Push new item to basket array
-  basket.push(item);
-  console.log("Item added to basket: ", item);
-  return true;
+  if (isFull() === false) {
+    //Push new item to basket array
+    basket.push(item);
+    console.log("Item added to basket: ", item);
+    return true;
   } else {
-    console.log('Too many items in basket! Cannot add ' + item);
+    console.log("Too many items in basket! Cannot add " + item);
+    return false;
   }
 } //end addItem function
 
@@ -28,31 +29,54 @@ function empty() {
 }
 
 function isFull() {
-  if (basket.length === maxItems) {
-    return true;
-  } else {
+  if (basket.length < maxItems) {
     return false;
+  } else {
+    return true;
   }
 } // end isFull function
 
-//Code for testing
+function removeItem(item){
+    let index = basket.indexOf(item); console.log(index);
+    let deletedItem = basket.splice(index, 1); console.log(deletedItem);
+    if (index >= 0){
+        console.log('Item removed: ', deletedItem);
+        return deletedItem;
+    } else{
+        return null;
+    }
+}
+
+//Code for testing adding items
 console.log("Starting basket:", basket);
-console.log('--- Add 4 new items ---');
+console.log("--- Add 4 new items ---");
 addItem("Steak");
 addItem("potatoes");
 addItem("Asparagus");
 addItem("gravy");
+
+// Code for testing ifFull functionality
 console.log("Check if cart is full (expect false)?", isFull(), basket);
-console.log('--- Add bread ---');
+console.log("--- Add bread ---");
 addItem("bread");
 console.log("Check if cart is full (expect true)?", isFull(), basket);
-console.log('--- Try to add Dessert, Expect to be full ---');
-addItem('Dessert');
-console.log('--- Run list items (expect 5 items) ---');
+
+// Code for checking addItem while cart is full
+console.log("--- Try to add Dessert, Expect to be full ---");
+addItem("Dessert");
+
+// Code to test for listItems functionality
+console.log("--- Run list items (expect 5 items) ---");
 listItems(basket);
-console.log('--- Run empty basket function (expect empty basket) --- ')
-empty();
+
+// Tests to check functionality of removeItem
 console.log(basket);
+removeItem('Asparagus');
+console.log(basket); // End test for removeItem
+
+// Test for empyt functionality
+console.log("--- Run empty basket function (expect empty basket) --- ");
+empty();
 
 // DO NOT MODIFY
 // Used for automated testing
