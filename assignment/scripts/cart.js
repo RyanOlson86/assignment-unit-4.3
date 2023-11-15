@@ -24,7 +24,7 @@ function listItems(list) {
 } // end listItems function
 
 function empty() {
-  basket = [];
+  basket.length = 0; // NOTE: basket=[]; would not pass Prime Testing. Had to empty by changing array length
   console.log("Basket was emptied", basket);
 }
 
@@ -37,15 +37,16 @@ function isFull() {
 } // end isFull function
 
 function removeItem(item){
-    let index = basket.indexOf(item); console.log(index);
-    let deletedItem = basket.splice(index, 1); console.log(deletedItem);
+    let index = basket.indexOf(item); // console.log('index', index); // Used for debugging
+    let deletedItem = null;
     if (index >= 0){
-        console.log('Item removed: ', deletedItem);
-        return deletedItem;
+        deletedItem = basket.splice(index, 1); console.log(deletedItem);
+        console.log('Item removed: ', deletedItem[0]);
+        return deletedItem[0]; // NOTE: needed to add [0] to deleted item to pass Prime Testing
     } else{
-        return null;
+        return deletedItem;
     }
-}
+}   
 
 //Code for testing adding items
 console.log("Starting basket:", basket);
@@ -72,7 +73,10 @@ listItems(basket);
 // Tests to check functionality of removeItem
 console.log(basket);
 removeItem('Asparagus');
-console.log(basket); // End test for removeItem
+console.log(basket); 
+removeItem('carrots');
+console.log(basket); 
+// End test for removeItem
 
 // Test for empyt functionality
 console.log("--- Run empty basket function (expect empty basket) --- ");
