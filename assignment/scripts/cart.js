@@ -64,7 +64,7 @@ console.log("Check if cart is full (expect true)?", isFull(), basket);
 
 // Code for checking addItem while cart is full
 console.log("--- Try to add Dessert, Expect to be full ---");
-addItem("Dessert");
+console.log(addItem("Dessert")); // expect to return false
 
 // Code to test for listItems functionality
 console.log("--- Run list items (expect 5 items) ---");
